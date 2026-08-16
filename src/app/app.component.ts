@@ -16,10 +16,14 @@ const red = [255, 0, 0];
 const green = [0, 255, 0];
 const blue = [0, 0, 255];
 
+import { ChangeDetectionStrategy } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
+  standalone: false
 })
 export class AppComponent implements OnInit {
 

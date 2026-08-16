@@ -1,5 +1,5 @@
 
-<select (change)="setLevel($event.target.value)">
+<select (change)="setLevel($any($event.target).value)">
   <option value="1">Easy</option>
   <option value="2">Medium</option>
   <option value="4">Hard</option>
