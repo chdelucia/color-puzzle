@@ -1,31 +1,35 @@
-
 <select (change)="setLevel($any($event.target).value)">
   <option value="1">Easy</option>
   <option value="2">Medium</option>
   <option value="4">Hard</option>
 </select>
 
-<section class="tableboard" *ngIf="domMatrix.length" [ngClass]="{'medium': extraTableBoard}">
-  <div *ngFor="let item of domMatrix; let i = index"
+@if (domMatrix().length) {
+  <section class="tableboard" [class.medium]="extraTableBoard()">
+    @for (item of domMatrix(); track $index; let i = $index) {
+      <div
         class="color-box col" 
-        [ngStyle]="{'background': 'rgb('+item.join()+')'}"
+        [ngStyle]="{'background': 'rgb(' + item.join() + ')'}"
         (click)="onClick(i)"
-        [ngClass]="{'selected': firtItemClicked?.position === i }">
-  </div>
-  
-</section>
-<div class="moves">Moves: <span id="move-counter">{{moves}}</span></div>
+        [class.selected]="firstItemClicked()?.position === i">
+      </div>
+    }
+  </section>
+}
+
+<div class="moves">Moves: <span id="move-counter">{{ moves() }}</span></div>
 <div class="restart">
   <button type="button" class="btn btn-primary" (click)="restartGame()">Restart Game</button>
 </div>
+
 <section class="legend">
-        <div *ngFor="let item of legend"class="legend--row">
-          <div class="legend--item" [ngStyle]="{'background': 'rgb('+item.mainColor.join()+')'}"></div>
-          <span class="legend--simbol"> + </span>
-          <div class="legend--item" [ngStyle]="{'background': 'rgb('+item.secondColor.join()+')'}"></div>
-          <span class="legend--simbol"> = </span>
-          <div class="legend--item" [ngStyle]="{'background': 'rgb('+item.resultColor.join()+')'}"></div>
-        </div>  
+  @for (item of legend(); track $index) {
+    <div class="legend--row">
+      <div class="legend--item" [ngStyle]="{'background': 'rgb(' + item.mainColor.join() + ')'}"></div>
+      <span class="legend--simbol"> + </span>
+      <div class="legend--item" [ngStyle]="{'background': 'rgb(' + item.secondColor.join() + ')'}"></div>
+      <span class="legend--simbol"> = </span>
+      <div class="legend--item" [ngStyle]="{'background': 'rgb(' + item.resultColor.join() + ')'}"></div>
+    </div>
+  }
 </section>
-
-
